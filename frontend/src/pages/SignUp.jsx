@@ -1,54 +1,103 @@
-import React, { useState } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import Logo from "../assets/logo.png";
+import { ToastContainer, toast } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
+import axios from "axios";
+import { signUpRoute } from "../utils/APIRoutes";
 
 export default function SignUp() {
-    //const [username, setUsername] = useState(undefined);
 
-    function handleSubmit(e) {
-        e.preventDefault()
+    const toastOptions = {
+      position: "bottom-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    };
+  
+    const [valuesForm, setValuesForm] = useState({
+      username: "",
+      email: "",
+      password: "",
+      confirmPassword: ""
+    });
+  
+    async function handleSubmit(e) {
+      e.preventDefault();
+      if(handleValidation()) {
+        const {username, email, password, confirmPassword} = valuesForm;
+        const { data } = await axios.post()
+      }
+      
     }
 
     function handleChange(e) {
+      setValuesForm({...valuesForm, [e.target.name]: e.target.value});
+    }
 
+    function handleValidation() {
+      const {username, email, password, confirmPassword} = valuesForm;
+      if (password !== confirmPassword) { 
+        toast.error('A senha e confirmar senha devem ser iguais!', toastOptions);
+        return false;
+      }
+      if (username.length < 3) {
+        toast.error('Insira um usuário com pelo menos 3 caracteres!', toastOptions);
+        return false;
+      }
+      if (password.length <= 8) {
+        toast.error('Insira uma senha com pelo menos 8 caracteres!', toastOptions);
+        return false;
+      }
+      if (email === "") {
+        toast.error('Email é obrigatório', toastOptions);
+        return false;
+      }
+      return true;
     }
   
     return(
         <>
-            <FormConteiner>
-                <form onSubmit={(event) => handleSubmit(event)}>
-                    <div className="brand"> 
-                        <img src={Logo} alt="Logo" />
-                    </div>
-                    <input 
-                        type="text"
-                        placeholder="Usuário"
-                        name="usuário"
-                        onChange={e => setChange(e)}
-                    />
-                    <input 
-                        type="email"
-                        placeholder="Email"
-                        name="email"
-                        onChange={e => setChange(e)}
-                    />
-                    <input 
-                        type="password"
-                        placeholder="Senha"
-                        name="password"
-                        onChange={e => setChange(e)}
-                    />
-                    <input 
-                        type="password"
-                        placeholder="Confirmar Senha"
-                        name="confirmPassword"
-                        onChange={e => setChange(e)}
-                    />
-                    <button type="submit">Criar Usuário</button>
-                    <span>Já possui uma conta? <Link to="/sign-in">Login</Link>  </span>
-                </form>
-            </FormConteiner>
+          <FormConteiner>
+              <form onSubmit={(event) => handleSubmit(event)}>
+                  <div className="brand"> 
+                      <img src={Logo} alt="Logo" />
+                  </div>
+                  <input 
+                      type="text"
+                      placeholder="Usuário"
+                      name="username"
+                      onChange={e => handleChange(e)}
+                  />
+                  <input 
+                      type="email"
+                      placeholder="Email"
+                      name="email"
+                      onChange={e => handleChange(e)}
+                  />
+                  <input 
+                      type="password"
+                      placeholder="Senha"
+                      name="password"
+                      onChange={e => handleChange(e)}
+                  />
+                  <input 
+                      type="password"
+                      placeholder="Confirmar Senha"
+                      name="confirmPassword"
+                      onChange={e => handleChange(e)}
+                  />
+                  <button type="submit">Criar Usuário</button>
+                  <span>Já possui uma conta? <Link to="/sign-in">Login</Link>  </span>
+              </form>
+              <ToastContainer />
+          </FormConteiner>
+
         </>
   );
 }
