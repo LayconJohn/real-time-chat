@@ -1,6 +1,6 @@
 import React, { useState, useCallback, useEffect } from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Logo from "../assets/logo.png";
 import { ToastContainer, toast } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
@@ -9,6 +9,7 @@ import { signUpRouter } from "../utils/APIRoutes";
 
 export default function SignUp() {
 
+    const navigate = useNavigate();
     const toastOptions = {
       position: "bottom-right",
       autoClose: 5000,
@@ -34,6 +35,12 @@ export default function SignUp() {
         const { data } = await axios.post(signUpRouter, {
           username, password, email
         })
+        if (!data) {
+          toast.error(data.message, toastOptions);
+        }
+        localStorage.setItem("chat-app-user", JSON.stringify({ username: data.username, email: data.email }))
+        toast("Cadastro Realizado!", toastOptions);
+        navigate("/")
         console.log(data);
       }
       
