@@ -5,7 +5,7 @@ import Logo from "../assets/logo.png";
 import { ToastContainer, toast } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
-import { signUpRoute } from "../utils/APIRoutes";
+import { signUpRouter } from "../utils/APIRoutes";
 
 export default function SignUp() {
 
@@ -31,7 +31,10 @@ export default function SignUp() {
       e.preventDefault();
       if(handleValidation()) {
         const {username, email, password, confirmPassword} = valuesForm;
-        const { data } = await axios.post()
+        const { data } = await axios.post(signUpRouter, {
+          username, password, email
+        })
+        console.log(data);
       }
       
     }
