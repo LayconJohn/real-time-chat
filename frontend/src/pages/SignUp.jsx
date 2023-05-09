@@ -41,7 +41,7 @@ export default function SignUp() {
         localStorage.setItem("chat-app-user", JSON.stringify({ username: data.username, email: data.email }))
         toast("Cadastro Realizado!", toastOptions);
         navigate("/")
-        console.log(data);
+        //console.log(data);
       }
       
     }
