@@ -17,8 +17,22 @@ async function signUp({ username, email, password }) {
     return userCreated;
 }
 
+async function signIn({ username, password }) {
+    const user = await Users.findOne({ username });
+    if (!user) {
+        throw badRequestError("User or password incorrect");
+    }
+    const isPasswordValid = await bcrypt.compare(password, user.password);
+    if (!isPasswordValid) {
+        throw badRequestError("User or password incorrect");
+    }
+    delete user.password;
+    return user;
+}
+
 const userService = {
     signUp,
+    signIn
 };
 
 export default userService;
