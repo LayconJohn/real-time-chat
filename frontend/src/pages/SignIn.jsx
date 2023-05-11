@@ -25,6 +25,12 @@ export default function SignIn() {
       username: "",
       password: ""
     });
+
+    useEffect(() => {
+      if(localStorage.getItem("chat-app-user")) {
+        navigate("/")        
+      }
+    }, []);
   
     async function handleSubmit(e) {
       e.preventDefault();

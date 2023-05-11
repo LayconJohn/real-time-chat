@@ -28,6 +28,12 @@ export default function SignUp() {
       confirmPassword: ""
     });
   
+    useEffect(() => {
+      if(localStorage.getItem("chat-app-user")) {
+        navigate("/")        
+      }
+    }, []);
+
     async function handleSubmit(e) {
       e.preventDefault();
       if(handleValidation()) {
