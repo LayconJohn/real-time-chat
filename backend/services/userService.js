@@ -30,9 +30,21 @@ async function signIn({ username, password }) {
     return user;
 }
 
+async function setAvatar(userId, avatarImage) {
+    const userData = await Users.findByIdAndUpdate(userId, {
+        isAvatarImage: true,
+        avatarImage: avatarImage,
+    });
+    return {
+        isSet: userData.isAvatarImageSet,
+        image: userData.avatarImage
+    }
+}
+
 const userService = {
     signUp,
-    signIn
+    signIn,
+    setAvatar,
 };
 
 export default userService;

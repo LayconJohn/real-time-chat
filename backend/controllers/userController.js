@@ -20,9 +20,21 @@ async function signIn(req, res, next) {
     }
 }
 
+async function setAvatar(req, res, next) {
+    const userId = req.params.id;
+    const { avatarImage } = req.body;
+    try {
+        const avatarSettings = await userService.setAvatar(userId, avatarImage);
+        return res.status(201).send(avatarSettings); 
+    } catch (error) {
+        return res.status(404).send(error.message);
+    }
+}
+
 const userController = {
     signUp,
-    signIn
+    signIn,
+    setAvatar,
 };
 
 export default userController;
