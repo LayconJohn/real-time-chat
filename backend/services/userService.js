@@ -39,7 +39,7 @@ async function setAvatar(userId, avatarImage) {
         isSet: userData.isAvatarImageSet,
         image: userData.avatarImage
     }
-}
+} 
 
 const userService = {
     signUp,

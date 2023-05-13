@@ -3,7 +3,7 @@ import userService from "../services/userService.js";
 async function signUp(req, res, next) {
     const { username, email, password } = req.body;
     try {
-        const userCreated = await userService.signUp({ username, email, password })
+        const userCreated = await userService.signUp({ username, email, password });
         return res.status(201).send(userCreated);
     } catch (error) {
         return res.status(400).send(error.message);
@@ -20,7 +20,7 @@ async function signIn(req, res, next) {
     }
 }
 
-async function setAvatar(req, res, next) {
+async function setAvatar(req, res, next) {  
     const userId = req.params.id;
     const { avatarImage } = req.body;
     try {

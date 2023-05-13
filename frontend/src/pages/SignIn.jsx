@@ -39,13 +39,13 @@ export default function SignIn() {
         const { data } = await axios.post(signInRouter, {
           username, password
         })
+        console.log(data);
         if (!data) {
           toast.error(data.message, toastOptions);
         }
-        localStorage.setItem("chat-app-user", JSON.stringify({ username: data.username, email: data.email }))
+        localStorage.setItem("chat-app-user", JSON.stringify({ id: data._id, username: data.username, email: data.email }))
         toast("Login Realizado!", toastOptions);
-        navigate("/")
-        //console.log(data);
+        navigate("/");
       }
       
     }

@@ -26,15 +26,22 @@ export default function SetAvatar() {
     const [isLoading, setIsLoading] = useState(true);
     const [selectedAvatar, setSelectedAvatar] = useState(undefined);
 
+    useEffect(() => {
+        if(!localStorage.getItem("chat-app-user")) {
+            navigate("/sign-in");
+        }
+    }, []);
+
     async function setProfilePicture() {
         if(selectedAvatar===undefined) {
             toast.error("Por favor selecione um avatar");
         } else {
             const user = await JSON.parse(localStorage.getItem("chat-app-user"));
-            const { data } = await axios.post(`${setAvatarRouter}/${user._id}`,{
+            console.log(user);
+            const { data } = await axios.post(`${setAvatarRouter}/${user.id}`,{
                 image: avatars[selectedAvatar],
             });
-
+            console.log(data);
             if(data.isSet) {
                 user.isAvatarImageSet = true;
                 user.avatarImage = data.image;
