@@ -30,8 +30,7 @@ export default function SignUp() {
   
     useEffect(() => {
       if(localStorage.getItem("chat-app-user")) {
-        console.log("já tô aqui");
-        //navigate("/")        
+        navigate("/")        
       }
     }, []);
 
