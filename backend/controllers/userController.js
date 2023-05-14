@@ -34,10 +34,21 @@ async function setAvatar(req, res, next) {
     }
 }
 
+async function getAllUsers(re, res, next) {
+    const userId = req.params.id;
+    try {
+        const users = await userService.getAllUsers(userId);
+        return res.status(200).send(users);
+    } catch (error) {
+        return res.status(404).send(error.message);
+    }
+}
+
 const userController = {
     signUp,
     signIn,
     setAvatar,
+    getAllUsers,
 };
 
 export default userController;

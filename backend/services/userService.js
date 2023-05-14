@@ -40,10 +40,21 @@ async function setAvatar(userId, avatarImage) {
     }
 } 
 
+async function getAllUsers(userId) {
+    const users = await Users.find({ _id: userId }).select([
+        "email",
+        "username",
+        "avatarImage",
+        "_id"
+    ]);
+    return users;
+}
+
 const userService = {
     signUp,
     signIn,
     setAvatar,
+    getAllUsers
 };
 
 export default userService;
