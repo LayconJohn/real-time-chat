@@ -41,7 +41,7 @@ async function setAvatar(userId, avatarImage) {
 } 
 
 async function getAllUsers(userId) {
-    const users = await Users.find({ _id: userId }).select([
+    const users = await Users.find({ _id: {$ne: userId} }).select([
         "email",
         "username",
         "avatarImage",
