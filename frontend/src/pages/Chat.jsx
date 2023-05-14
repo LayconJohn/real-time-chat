@@ -10,6 +10,7 @@ export default function Chat() {
 
   const [contacts, setContacts] = useState([]);
   const [currentUser, setCurrentUser] = useState(undefined);
+  const [currentChat, setCurrentChat] = useState(undefined);
 
   useEffect(() => {
     async function fetchData() {
@@ -37,12 +38,17 @@ export default function Chat() {
     fetchData();
   }, [currentUser]);
 
+  function handleChatChange(chat) {
+    setCurrentChat(chat);
+  }
+
   return(
     <Container>
       <div className="container">
         <Contacts 
           contacts={contacts} 
           currentUser={currentUser}
+          changeChat={handleChatChange}
         />
       </div>
     </Container>
