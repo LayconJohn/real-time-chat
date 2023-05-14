@@ -91,11 +91,13 @@ const Container = styled.div`
         align-items: center;
         overflow: auto;
         gap: 0.8rem;&::-webkit-scrollbar {
-            width: 0.2rem;
+            width: 0.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
             &-thum: {
-                background-color: #ffffff39;
+                background-color: white;
                 width: 0.1rem;
                 border-radius: 1rem;
+                border: 1px solid rgba(255, 255, 255, 0.9);
             }
         }
         .contact{
