@@ -1,6 +1,6 @@
 import Users from "../models/userModel.js";
 import bcrypt from "bcrypt";
-import { badRequestError } from "../errors/index.js";
+import { badRequestError, notFoundError } from "../errors/index.js";
 
 async function signUp({ username, email, password }) {
     const usernameCheck = await Users.findOne({ username });
@@ -17,23 +17,23 @@ async function signUp({ username, email, password }) {
     return userCreated;
 }
 
-async function signIn({ username, password }) {
+async function signIn(username, password) {
     const user = await Users.findOne({ username });
     if (!user) {
-        throw badRequestError("User or password incorrect");
+        throw notFoundError("User or password incorrect");
     }
     const isPasswordValid = await bcrypt.compare(password, user.password);
     if (!isPasswordValid) {
-        throw badRequestError("User or password incorrect");
+        throw notFoundError("User or password incorrect");
     }
-    delete user.password;
+    
     return user;
 }
 
 async function setAvatar(userId, avatarImage) {
     const userData = await Users.findByIdAndUpdate(userId, {
-        isAvatarImage: true,
-        avatarImage: avatarImage,
+        isAvatarImageSet: true,
+        avatarImage: avatarImage,   
     });
     return {
         isSet: userData.isAvatarImageSet,

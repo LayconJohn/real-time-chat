@@ -13,16 +13,19 @@ async function signUp(req, res, next) {
 async function signIn(req, res, next) {
     const { username, password } = req.body;
     try {
-        const userLogged = await userService.signUp({ username, password });
+        const userLogged = await userService.signUp(username, password);
         return res.status(200).send(userLogged);
     } catch (error) {
-        return res.status(400).send(error.message);
+        if (error.name === "NotFoundError") {
+            return res.status(404).send(error.message);
+        }
+        return res.status(400).send(error);
     }
 }
 
 async function setAvatar(req, res, next) {  
     const userId = req.params.id;
-    const { avatarImage } = req.body;
+    const avatarImage = req.body.image;
     try {
         const avatarSettings = await userService.setAvatar(userId, avatarImage);
         return res.status(201).send(avatarSettings); 
