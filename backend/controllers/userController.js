@@ -34,7 +34,7 @@ async function setAvatar(req, res, next) {
     }
 }
 
-async function getAllUsers(re, res, next) {
+async function getAllUsers(req, res, next) {
     const userId = req.params.id;
     try {
         const users = await userService.getAllUsers(userId);
