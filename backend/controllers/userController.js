@@ -13,7 +13,7 @@ async function signUp(req, res, next) {
 async function signIn(req, res, next) {
     const { username, password } = req.body;
     try {
-        const userLogged = await userService.signUp(username, password);
+        const userLogged = await userService.signIn(username, password);
         return res.status(200).send(userLogged);
     } catch (error) {
         if (error.name === "NotFoundError") {

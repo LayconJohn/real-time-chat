@@ -18,7 +18,7 @@ async function signUp({ username, email, password }) {
 }
 
 async function signIn(username, password) {
-    const user = await Users.findOne({ username });
+    const user = await Users.findOne({ username: username });
     if (!user) {
         throw notFoundError("User or password incorrect");
     }
@@ -26,7 +26,6 @@ async function signIn(username, password) {
     if (!isPasswordValid) {
         throw notFoundError("User or password incorrect");
     }
-    
     return user;
 }
 
