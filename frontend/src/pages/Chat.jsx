@@ -6,6 +6,7 @@ import { allUsersRouter } from "../utils/APIRoutes";
 import Contacts from "../components/Contacts";
 import Welcome from "../components/Welcome";
 import ChatContainer from "../components/ChatContainer";
+import ChatInput from "../components/ChatInput";
 
 export default function Chat() {
   const navigate = useNavigate();
@@ -63,12 +64,6 @@ export default function Chat() {
               currentChat={currentChat}
             />
         }
-      </div>
-      <div className="chat-messages">
-
-      </div>
-      <div className="chat-input">
-
       </div>
     </Container>
   );
