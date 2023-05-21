@@ -38,7 +38,7 @@ export default function SetAvatar() {
         } else {
             const user = await JSON.parse(localStorage.getItem("chat-app-user"));
             //console.log(user);
-            const { data } = await axios.post(`${setAvatarRouter}/${user.id}?apikey=u6fWJnIv5ozlSb`,{
+            const { data } = await axios.post(`${setAvatarRouter}/${user._id}?apikey=u6fWJnIv5ozlSb`,{
                 image: avatars[selectedAvatar],
             });
             console.log(data);

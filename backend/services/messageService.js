@@ -20,8 +20,8 @@ async function getAllMessage({ from, to }) {
 
     const chatMessages = messages.map(msg => {
         return {
-            fromSelf: msg.sender.toString() === from,
-            message: msg.message.text.toString() === to
+            fromSelf: msg.sender.toString(),
+            message: msg.message.text.toString()
         };
     });
     return chatMessages;

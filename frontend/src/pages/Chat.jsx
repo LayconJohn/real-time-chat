@@ -32,7 +32,7 @@ export default function Chat() {
     async function fetchData() {
       if (currentUser) {
         if (currentUser.isAvatarImageSet) {
-          const { data } = await axios.get(`${allUsersRouter}/${currentUser.id}`);
+          const { data } = await axios.get(`${allUsersRouter}/${currentUser._id}`);
           setContacts(data)
         } else {
           navigate("/set-avatar");
