@@ -45,7 +45,7 @@ export default function SignUp() {
         if (!data) {
           toast.error(data.message, toastOptions);
         }
-        localStorage.setItem("chat-app-user", JSON.stringify({ id: data._id, username: data.username, email: data.email }))
+        localStorage.setItem("chat-app-user", JSON.stringify({ _id: data._id, username: data.username, email: data.email }))
         toast("Cadastro Realizado!", toastOptions);
         navigate("/")
       }
