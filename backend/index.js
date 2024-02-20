@@ -13,6 +13,9 @@ app.use(json());
 
 app.use("/api/auth", userRoutes);
 app.use("/api/chat", messageRoutes);
+app.get("/", (_req, res) => res.status(200).send("Ok"))
+app.get("/policy", (_req, res) => res.status(200).send("Política de provacidade"))
+app.get("/terms", (_req, res) => res.status(200).send("Termos de serviços"))
 
 db
     .then(() => {
