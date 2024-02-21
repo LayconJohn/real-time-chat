@@ -32,7 +32,7 @@
   */
 
 /**
- * @typedef {Object} avatarSettings
+ * @typedef {Object} AvatarSettings
  * @param {boolean} isSet
  * @param {string} avatar
  */
