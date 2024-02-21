@@ -1,6 +1,5 @@
 import userService from "../services/userService.js";
 import "../models/types/userTypes.js";
-import { Request, Response } from "express";
 
 async function signUp(req, res, next) {
     const { username, email, password } = req.body;

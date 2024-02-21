@@ -3,7 +3,10 @@ import bcrypt from "bcrypt";
 import { badRequestError, notFoundError } from "../errors/index.js";
 import "../models/types/userTypes.js";
 
-/**@param {SignUpUser} user */
+/**
+ * @param {SignUpUser} user 
+ * @returns {Promise<UserCreated>}
+ * */
 async function signUp({ username, email, password }) {
     const usernameCheck = await Users.findOne({ username });
     if (usernameCheck) {
@@ -19,7 +22,10 @@ async function signUp({ username, email, password }) {
     return userCreated;
 }
 
-/**@param {SignInUser} user*/
+/**
+ * @param {SignInUser} user
+ * @returns {Promise<UserCreated>}
+ * */
 async function signIn({username, password}) {
     const user = await Users.findOne({ username: username });
     if (!user) {
@@ -32,7 +38,10 @@ async function signIn({username, password}) {
     return user;
 }
 
-/**@param {SetAvatar} avatar*/
+/**
+ * @param {SetAvatar} avatar
+ * @returns {Promise<AvatarSettings>}
+ * */
 async function setAvatar({userId, avatarImage}) {
     const userData = await Users.findByIdAndUpdate(userId, {
         isAvatarImageSet: true,
