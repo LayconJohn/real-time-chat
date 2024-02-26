@@ -19,7 +19,10 @@ async function signUp({ username, email, password }) {
     const hashPassword = await bcrypt.hash(password, 10);
     const userCreated = await Users.create({ username, email, password: hashPassword });
     delete userCreated.password;
-    return userCreated;
+    return {
+        ...userCreated,
+        password: null
+    };
 }
 
 /**

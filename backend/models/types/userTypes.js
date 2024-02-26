@@ -26,7 +26,7 @@
  * @typedef { Object } UserCreated
  * @param {string} username
  * @param {string} email
- * @param {string}  password
+ * @param {null}  password
  * @param {boolean} isAvatarImageSet
  * @param {string} avatarImage
   */
