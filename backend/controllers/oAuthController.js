@@ -28,8 +28,20 @@ async function signIn(req, res) {
     }
 }
 
+function getMe(req, res) {
+    const cookie = get(req, `cookies[${process.env.COOKIE_NAME}]`);
+
+    try {
+        const decode = oAuthService.getMe(cookie);
+        return res.status(200),send(decode);
+    } catch (error) {
+        return res.status(400).send(null);
+    }
+}
+
 const oAuthController = {
-    signIn
+    signIn,
+    getMe
 }
 
 export default oAuthController;

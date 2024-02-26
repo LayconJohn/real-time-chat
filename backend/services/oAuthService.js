@@ -48,8 +48,13 @@ async function signIn(code) {
     return token;
 }
 
+function getMe() {
+    return jwt.verify(cookie, process.env.JWT_SECRET);
+}
+ 
 const oAuthService = {
     signIn,
+    getMe
 }
 
 export default oAuthService;
